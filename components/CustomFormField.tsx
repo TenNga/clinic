@@ -65,7 +65,7 @@ import PhoneInput from 'react-phone-number-input'
                         placeholder={placeholder}
                         international
                         withCountryCallingCode 
-                        value={field.value as E164Number | undefined}
+                        value={field.value as 'E164Number' | undefined}
                         onChange={field.onChange}
                         className='input-phone'
                     />
