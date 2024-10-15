@@ -78,14 +78,14 @@ import "react-datepicker/dist/react-datepicker.css";
             return (
                 <div className='flex rounded-md border border-dark-500 bg-dark-400'>
                     <Image 
-                        src="/assets/icons/calender.svg" 
+                        src="/assets/icons/calendar.svg" 
                         height={24} 
                         width={24} 
-                        alt='calender' 
-                        className='ml-2' 
+                        alt="calender" 
+                        className="ml-2" 
                     />
                     <FormControl>
-                    <DatePicker selected={field.value} onChange={date => field.onChange(date)} />
+                        <DatePicker selected={field.value} onChange={date => field.onChange(date)} />
                     </FormControl>
 
                 </div>
