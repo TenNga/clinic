@@ -6,7 +6,12 @@ import { z } from "zod"
 import { Button } from "@/components/ui/button"
 import {
   Form,
-  FormControl
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage
 } from "@/components/ui/form"
 import CustomFormField from "../CustomFormField"
 import SubmitButton from "../SubmitButton"
@@ -18,8 +23,9 @@ import { FormFieldType } from "./PatientForm"
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group"
 import { Doctors, GenderOptions, IdentificationTypes } from "@/constants"
 import { Label } from "@radix-ui/react-label"
-import { SelectItem } from "../ui/select"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select"
 import Image from "next/image"
+import Link from "next/link"
  
 const RegisterForm = ({user} : {user: User}) => {
 
@@ -159,6 +165,42 @@ const RegisterForm = ({user} : {user: User}) => {
             </div>
         </section>
 
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select a verified email to display" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                {Doctors.map((doctor, i) => (
+                <SelectItem key={doctor.name + i} value={doctor.name}>
+                    <div className="flex cursor-pointer items-center gap-2">
+                    <Image
+                        src={doctor.image}
+                        width={32}
+                        height={32}
+                        alt="doctor"
+                        className="rounded-full border border-dark-500"
+                    />
+                    <p>{doctor.name}</p>
+                    </div>
+                </SelectItem>
+            ))}
+                </SelectContent>
+              </Select>
+             
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+
         <CustomFormField 
             fieldType={FormFieldType.SELECT}
             control={form.control}
@@ -166,17 +208,17 @@ const RegisterForm = ({user} : {user: User}) => {
             label="Primary Physician"
             placeholder="Select a physician"
         >
-            {Doctors.map(doctor => (
-                <SelectItem key={doctor.name} value={doctor.name}>
+            {Doctors.map((doctor, i) => (
+                <SelectItem key={doctor.name + i} value={doctor.name}>
                     <div className="flex cursor-pointer items-center gap-2">
-                        <Image 
-                            src={doctor.image}
-                            width={32}
-                            height={32}
-                            alt={doctor.name}
-                            className="rounded-full border border-dark-500"
-                        />
-                        <p>{doctor.name}</p>
+                    <Image
+                        src={doctor.image}
+                        width={32}
+                        height={32}
+                        alt="doctor"
+                        className="rounded-full border border-dark-500"
+                    />
+                    <p>{doctor.name}</p>
                     </div>
                 </SelectItem>
             ))}
