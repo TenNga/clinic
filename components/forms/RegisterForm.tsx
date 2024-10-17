@@ -6,12 +6,7 @@ import { z } from "zod"
 import { Button } from "@/components/ui/button"
 import {
   Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage
+  FormControl
 } from "@/components/ui/form"
 import CustomFormField from "../CustomFormField"
 import SubmitButton from "../SubmitButton"
@@ -23,9 +18,9 @@ import { FormFieldType } from "./PatientForm"
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group"
 import { Doctors, GenderOptions, IdentificationTypes } from "@/constants"
 import { Label } from "@radix-ui/react-label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select"
+import {  SelectItem } from "../ui/select"
 import Image from "next/image"
-import Link from "next/link"
+import FileUploader from "../FileUploader"
  
 const RegisterForm = ({user} : {user: User}) => {
 
@@ -165,41 +160,6 @@ const RegisterForm = ({user} : {user: User}) => {
             </div>
         </section>
 
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select a verified email to display" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                {Doctors.map((doctor, i) => (
-                <SelectItem key={doctor.name + i} value={doctor.name}>
-                    <div className="flex cursor-pointer items-center gap-2">
-                    <Image
-                        src={doctor.image}
-                        width={32}
-                        height={32}
-                        alt="doctor"
-                        className="rounded-full border border-dark-500"
-                    />
-                    <p>{doctor.name}</p>
-                    </div>
-                </SelectItem>
-            ))}
-                </SelectContent>
-              </Select>
-             
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
 
         <CustomFormField 
             fieldType={FormFieldType.SELECT}
@@ -240,6 +200,7 @@ const RegisterForm = ({user} : {user: User}) => {
                 placeholder="ACB123456789"
             />
         </div>
+
         <div className="flex flex-col gap-6 xl:flex-row">
             <CustomFormField 
                 fieldType={FormFieldType.TEXTAREA}
@@ -256,6 +217,7 @@ const RegisterForm = ({user} : {user: User}) => {
                 placeholder="Iburprofen 200mg"
             />
         </div>
+        
         <div className="flex flex-col gap-6 xl:flex-row">
             <CustomFormField 
                 fieldType={FormFieldType.TEXTAREA}
@@ -294,6 +256,26 @@ const RegisterForm = ({user} : {user: User}) => {
                 </SelectItem>
             ))}
         </CustomFormField>
+
+        <CustomFormField 
+                fieldType={FormFieldType.INPUT}
+                control={form.control}
+                name="identificationNumber"
+                label="Identification number"
+                placeholder="123456789"
+        />
+
+        <CustomFormField 
+            fieldType={FormFieldType.SKELETON}
+            control={form.control}
+            name="identificationDocument"
+            label="Scanned copy of identification document"
+            renderSkeleton={field => (
+                <FormControl>
+                   <FileUploader files={field.value} onChange={field.onChange} />
+                </FormControl>
+            )}
+        />
 
         <SubmitButton isLoading={isLoading}>
             Get Started

@@ -61,7 +61,6 @@ import { Textarea } from './ui/textarea'
                     </FormControl>
                 </div>
             )
-            break;
             
         case FormFieldType.PHONE_INPUT:
             return(
