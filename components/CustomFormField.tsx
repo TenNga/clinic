@@ -21,6 +21,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { Select, SelectTrigger } from './ui/select'
 import { SelectContent, SelectValue } from '@radix-ui/react-select'
 import { Textarea } from './ui/textarea'
+import { Checkbox } from './ui/checkbox'
 
   interface CustomProps {
     control: Control<any>,
@@ -126,6 +127,20 @@ import { Textarea } from './ui/textarea'
                         disabled={props.disabled}
                     />
                 </FormControl>
+            )
+
+        case FormFieldType.CHECKBOX:
+            return(
+                <div className='flex items-center gap-4'>
+                    <Checkbox 
+                        id={props.name}
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                    />
+                    <label htmlFor={props.name} className='checkbox-label'>
+                        {props.label}
+                    </label>
+                </div>
             )
         default:
             break;
