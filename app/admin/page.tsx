@@ -1,9 +1,54 @@
 import StatCard from '@/components/StatCard'
+import { getRecentAppointmentList } from '@/lib/actions/appointment.actions'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-const Admin = () => {
+const Admin = async () => {
+
+  const appointments = await getRecentAppointmentList();
+
+  // {
+  //   totalcount: 2,
+  //   scheduledCount: 0,
+  //   pendingCount: 2,
+  //   cancelledCount: 0,
+  //   documents: [
+  //     {
+  //       schedule: '2024-10-25T22:00:00.000+00:00',
+  //       reason: 'tsttesdf',
+  //       note: '',
+  //       primaryPhysician: 'Leila Cameron',
+  //       status: 'pending',
+  //       userId: '670c746f003a479afeb9',
+  //       cancellationReason: null,
+  //       '$id': '67157e55003ad323e1a1',
+  //       '$createdAt': '2024-10-20T22:04:07.277+00:00',
+  //       '$updatedAt': '2024-10-20T22:04:07.277+00:00',
+  //       '$permissions': [],
+  //       patient: [Object],
+  //       '$databaseId': '670c656900248198ac6f',
+  //       '$collectionId': '670c65c70038c82f6c44'
+  //     },
+  //     {
+  //       schedule: '2024-11-01T02:00:00.000+00:00',
+  //       reason: 'annual checkup',
+  //       note: '',
+  //       primaryPhysician: 'Jane Powell',
+  //       status: 'pending',
+  //       userId: '670c746f003a479afeb9',
+  //       cancellationReason: null,
+  //       '$id': '67145e39001cbccec86d',
+  //       '$createdAt': '2024-10-20T01:34:50.342+00:00',
+  //       '$updatedAt': '2024-10-20T01:34:50.342+00:00',
+  //       '$permissions': [],
+  //       patient: [Object],
+  //       '$databaseId': '670c656900248198ac6f',
+  //       '$collectionId': '670c65c70038c82f6c44'
+  //     }
+  //   ]
+  // }
+
   return (
     <div className='mx-auto flex max-w-7xl flex-col space-y-14'>
       <header className='admin-header'>
@@ -29,19 +74,19 @@ const Admin = () => {
         <section className='admin-stat'>
           <StatCard 
             type="appointments"
-            count={5}
+            count={appointments.scheduleCount}
             label="scheduled appointments"
             icon="/assets/icons/appointments.svg"
           />
           <StatCard 
             type="pending"
-            count={4}
+            count={appointments.pendingCount}
             label="pending appointments"
             icon="/assets/icons/pending.svg"
           />
           <StatCard 
             type="cancelled"
-            count={12}
+            count={appointments.cancelledCount}
             label="cancelled appointments"
             icon="/assets/icons/cancelled.svg"
           />
