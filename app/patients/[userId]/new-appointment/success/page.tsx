@@ -1,3 +1,4 @@
+import SubmitButton from '@/components/SubmitButton'
 import { Button } from '@/components/ui/button'
 import { Doctors } from '@/constants'
 import { getAppointment } from '@/lib/actions/appointment.actions'
@@ -49,7 +50,7 @@ const Success = async ({ params: { userId }, searchParams } : SearchParamProps) 
                 <p>Requested appointment details:</p>
                 <div className='flex items-center gap-3'>
                     <Image 
-                        src={doctor?.image}
+                        src={doctor?.image!}
                         width={100}
                         height={100}
                         alt='doctor'
