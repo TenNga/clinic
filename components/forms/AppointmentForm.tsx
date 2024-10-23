@@ -100,6 +100,8 @@ const AppointmentForm = ({
 
                 const updatedAppointment = await updateAppointment(appointmentToUpdate);
 
+                console.log("UPDATE APT::>>> ",appointmentToUpdate);
+
                 if(updatedAppointment) {
                     setOpen && setOpen(false) 
                     form.reset();
