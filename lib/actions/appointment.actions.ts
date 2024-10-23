@@ -9,8 +9,7 @@ import { revalidatePath } from "next/cache";
 
 export const createAppointment = async (appointment: CreateAppointmentParams) => {
     try {
-        console.log("Database ID::: ",{DATABASE_ID, APPOINTMENT_COLLECTION_ID});
-        const newAppointment = await databases.createDocument(
+         const newAppointment = await databases.createDocument(
             DATABASE_ID!,
             APPOINTMENT_COLLECTION_ID!,
             ID.unique(),
@@ -76,7 +75,10 @@ export const getRecentAppointmentList = async () => {
 
         return parseStringify(data);
     } catch (error) {
-        console.log(error);
+        console.error(
+            "An error occurred while retrieving the recent appointments:",
+            error
+          );
     }
 }
 
