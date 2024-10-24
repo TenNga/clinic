@@ -5,7 +5,7 @@
 - [📋 Table of Contents](#-table-of-contents)
 - [🤖 Introduction](#-introduction)
 - [⚙️ Tech Stack](#️-tech-stack)
-- [Features](#features)
+- [🏆 Features](#-features)
 - [🤸 Quick Start](#-quick-start)
 
 ## <a name="introduction">🤖 Introduction</a>
@@ -20,7 +20,7 @@ This application is just a simple application to showcase what a simple clinic m
 - TailwindCSS
 - ShadCN
 
-## <a name="features">Features</a>
+## <a name="features">🏆 Features</a>
 
 **Register as a Patient**: Users can sign up and create a personal profile as a patient.
 
@@ -101,10 +101,10 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to view the 
 
 **Screenshots**
 
-Add screenshots or GIFs of your application to showcase its functionality.
+![](https://github.com/TenNga/clinic/blob/main/public/assets/images/screen_1.png?raw=true)
+![](https://github.com/TenNga/clinic/blob/main/public/assets/images/screen_3.png?raw=true)
+![](https://github.com/TenNga/clinic/blob/main/public/assets/images/screen_2.png?raw=true)
 
-Contributing
-Contributions are welcome! Please fork the repository and open a pull request with your changes.
+**Contributing**
 
-License
-This project is licensed under the MIT License - see the LICENSE file for details.
+Used resource and help from [JavaScript Mastery](https://www.youtube.com/@javascriptmastery)
