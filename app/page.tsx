@@ -26,7 +26,7 @@ export default function Home({ searchParams } : SearchParamProps) {
 
         <div className="text-14-regular mt-20 flex justify-between">
           <p className="justify-items-end text-dark-600 xl:text-left">
-            © 2024 Carepluse
+            © 2024 People's Clinic
           </p>
           <Link href="/?admin=true" className="text-green-500">
             Admin
@@ -36,7 +36,7 @@ export default function Home({ searchParams } : SearchParamProps) {
     </section>
 
     <Image
-      src="/assets/images/onboarding-img.png"
+      src="/assets/images/onboarding-img.jpg"
       height={1000}
       width={1000}
       alt="patient"
