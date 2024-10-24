@@ -41,45 +41,49 @@ export const getAppointment = async (appointmentId: string) => {
 
 export const getRecentAppointmentList = async () => {
     try {
-        const recentAppointments = await databases.listDocuments(
-            DATABASE_ID!,
-            APPOINTMENT_COLLECTION_ID!,
-            [
-                Query.orderDesc('$createdAt')
-            ]
+        const appointments = await databases.listDocuments(
+          DATABASE_ID!,
+          APPOINTMENT_COLLECTION_ID!,
+          [Query.orderDesc("$createdAt")]
         );
-
+    
         const initialCounts = {
-            scheduledCount: 0,
-            pendingCount: 0,
-            cancelledCount: 0
-        }
-
-        const counts = (recentAppointments.documents as Appointment[]).reduce((acc, apt) => {
-            if(apt.status === 'scheduled'){
-                acc.scheduledCount += 1;
-            } else if(apt.status === 'pending'){
-                acc.pendingCount += 1;
-            } else if(apt.status === 'cancelled'){
-                acc.cancelledCount += 1;
-            } 
-
+          scheduledCount: 0,
+          pendingCount: 0,
+          cancelledCount: 0,
+        };
+    
+        const counts = (appointments.documents as Appointment[]).reduce(
+          (acc, appointment) => {
+            switch (appointment.status) {
+              case "scheduled":
+                acc.scheduledCount++;
+                break;
+              case "pending":
+                acc.pendingCount++;
+                break;
+              case "cancelled":
+                acc.cancelledCount++;
+                break;
+            }
             return acc;
-        },initialCounts)
-
+          },
+          initialCounts
+        );
+    
         const data = {
-            totalcount: recentAppointments.total,
-            ...counts,
-            documents: recentAppointments.documents
-        }        
-
+          totalCount: appointments.total,
+          ...counts,
+          documents: appointments.documents,
+        };
+    
         return parseStringify(data);
-    } catch (error) {
+      } catch (error) {
         console.error(
-            "An error occurred while retrieving the recent appointments:",
-            error
-          );
-    }
+          "An error occurred while retrieving the recent appointments:",
+          error
+        );
+      }
 }
 
 export const updateAppointment = async ({ appointmentId, userId, appointment, type} : UpdateAppointmentParams) => {
